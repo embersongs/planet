@@ -1,12 +1,12 @@
-using UnityEngine;
+п»їusing UnityEngine;
 
 public class ClickToPlaceWithPreview : MonoBehaviour
 {
-    [Header("Основные настройки")]
-    public GameObject previewObject; // Простой объект для превью (например, полупрозрачный куб)
-    public GameObject objectToPlace; // Объект для спавна по клику
-    public LayerMask placementMask; // Слои, по которым можно размещать объекты
-    public float yOffset = 0.5f; // Смещение по высоте
+    [Header("РћСЃРЅРѕРІРЅС‹Рµ РЅР°СЃС‚СЂРѕР№РєРё")]
+    public GameObject previewObject; // РџСЂРѕСЃС‚РѕР№ РѕР±СЉРµРєС‚ РґР»СЏ РїСЂРµРІСЊСЋ (РЅР°РїСЂРёРјРµСЂ, РїРѕР»СѓРїСЂРѕР·СЂР°С‡РЅС‹Р№ РєСѓР±)
+    public GameObject objectToPlace; // РћР±СЉРµРєС‚ РґР»СЏ СЃРїР°РІРЅР° РїРѕ РєР»РёРєСѓ
+    public LayerMask placementMask; // РЎР»РѕРё, РїРѕ РєРѕС‚РѕСЂС‹Рј РјРѕР¶РЅРѕ СЂР°Р·РјРµС‰Р°С‚СЊ РѕР±СЉРµРєС‚С‹
+    public float yOffset = 0.5f; // РЎРјРµС‰РµРЅРёРµ РїРѕ РІС‹СЃРѕС‚Рµ
 
     private Camera mainCamera;
     private bool canPlace = false;
@@ -15,7 +15,7 @@ public class ClickToPlaceWithPreview : MonoBehaviour
     {
         mainCamera = Camera.main;
 
-        // Создаем превью-объект и делаем его полупрозрачным
+        // РЎРѕР·РґР°РµРј РїСЂРµРІСЊСЋ-РѕР±СЉРµРєС‚ Рё РґРµР»Р°РµРј РµРіРѕ РїРѕР»СѓРїСЂРѕР·СЂР°С‡РЅС‹Рј
         if (previewObject != null)
         {
             previewObject = Instantiate(previewObject);
@@ -27,7 +27,7 @@ public class ClickToPlaceWithPreview : MonoBehaviour
     {
         UpdatePreviewPosition();
 
-        // Размещаем объект по ЛКМ
+        // Р Р°Р·РјРµС‰Р°РµРј РѕР±СЉРµРєС‚ РїРѕ Р›РљРњ
         if (Input.GetMouseButtonDown(0) && canPlace)
         {
             Instantiate(objectToPlace, previewObject.transform.position, transform.rotation);
@@ -73,7 +73,7 @@ public class ClickToPlaceWithPreview : MonoBehaviour
         Renderer renderer = previewObject.GetComponent<Renderer>();
         if (renderer != null)
         {
-            color.a = 0.5f; // Фиксированная прозрачность
+            color.a = 0.5f; // Р¤РёРєСЃРёСЂРѕРІР°РЅРЅР°СЏ РїСЂРѕР·СЂР°С‡РЅРѕСЃС‚СЊ
             renderer.material.color = color;
         }
     }

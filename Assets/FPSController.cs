@@ -1,4 +1,4 @@
-using UnityEngine;
+п»їusing UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 public class FPSController : MonoBehaviour
@@ -14,9 +14,9 @@ public class FPSController : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
 
     [Header("Ground Check")]
-    [SerializeField] private LayerMask groundMask; // Укажите слой, по которому определяется земля
-    [SerializeField] private float groundCheckDistance = 0.2f; // Длина луча
-    [SerializeField] private Transform groundCheckPoint; // Точка, откуда выпускается луч (обычно внизу персонажа)
+    [SerializeField] private LayerMask groundMask; // РЈРєР°Р¶РёС‚Рµ СЃР»РѕР№, РїРѕ РєРѕС‚РѕСЂРѕРјСѓ РѕРїСЂРµРґРµР»СЏРµС‚СЃСЏ Р·РµРјР»СЏ
+    [SerializeField] private float groundCheckDistance = 0.2f; // Р”Р»РёРЅР° Р»СѓС‡Р°
+    [SerializeField] private Transform groundCheckPoint; // РўРѕС‡РєР°, РѕС‚РєСѓРґР° РІС‹РїСѓСЃРєР°РµС‚СЃСЏ Р»СѓС‡ (РѕР±С‹С‡РЅРѕ РІРЅРёР·Сѓ РїРµСЂСЃРѕРЅР°Р¶Р°)
 
     private CharacterController characterController;
     private Vector3 velocity;
@@ -70,7 +70,7 @@ public class FPSController : MonoBehaviour
 
     private void ApplyGravity()
     {
-        // Проверка земли через Raycast
+        // РџСЂРѕРІРµСЂРєР° Р·РµРјР»Рё С‡РµСЂРµР· Raycast
         isGrounded = Physics.Raycast(
             groundCheckPoint.position,
             Vector3.down,
@@ -78,7 +78,7 @@ public class FPSController : MonoBehaviour
             groundMask
         );
 
-        // Альтернативный вариант: SphereCast для большей точности
+        // РђР»СЊС‚РµСЂРЅР°С‚РёРІРЅС‹Р№ РІР°СЂРёР°РЅС‚: SphereCast РґР»СЏ Р±РѕР»СЊС€РµР№ С‚РѕС‡РЅРѕСЃС‚Рё
         // isGrounded = Physics.SphereCast(
         //     groundCheckPoint.position,
         //     characterController.radius * 0.9f,
@@ -90,14 +90,14 @@ public class FPSController : MonoBehaviour
 
         if (isGrounded && velocity.y < 0)
         {
-            velocity.y = -2f; // Фиксированная небольшая сила прижима к земле
+            velocity.y = -2f; // Р¤РёРєСЃРёСЂРѕРІР°РЅРЅР°СЏ РЅРµР±РѕР»СЊС€Р°СЏ СЃРёР»Р° РїСЂРёР¶РёРјР° Рє Р·РµРјР»Рµ
         }
 
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
     }
 
-    // Визуализация луча в редакторе (для отладки)
+    // Р’РёР·СѓР°Р»РёР·Р°С†РёСЏ Р»СѓС‡Р° РІ СЂРµРґР°РєС‚РѕСЂРµ (РґР»СЏ РѕС‚Р»Р°РґРєРё)
     private void OnDrawGizmos()
     {
         if (groundCheckPoint != null)
@@ -111,13 +111,13 @@ public class FPSController : MonoBehaviour
     {
         if (other.CompareTag("Speed"))
         {
-            // Увеличиваем скорость
+            // РЈРІРµР»РёС‡РёРІР°РµРј СЃРєРѕСЂРѕСЃС‚СЊ
             walkSpeed = 10f;
 
-            // Уничтожаем объект Speed (опционально)
+            // РЈРЅРёС‡С‚РѕР¶Р°РµРј РѕР±СЉРµРєС‚ Speed (РѕРїС†РёРѕРЅР°Р»СЊРЅРѕ)
             Destroy(other.gameObject);
 
-            // Запускаем корутину для возврата скорости к исходной через заданное время
+            // Р—Р°РїСѓСЃРєР°РµРј РєРѕСЂСѓС‚РёРЅСѓ РґР»СЏ РІРѕР·РІСЂР°С‚Р° СЃРєРѕСЂРѕСЃС‚Рё Рє РёСЃС…РѕРґРЅРѕР№ С‡РµСЂРµР· Р·Р°РґР°РЅРЅРѕРµ РІСЂРµРјСЏ
         }
     }
 }

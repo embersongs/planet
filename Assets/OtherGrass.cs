@@ -53,15 +53,15 @@ public class OtherGrass : MonoBehaviour
 
         for (int i = 0; i < maxAttempts; i++)
         {
-            // Генерация случайного направления
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             Vector2 randomCircle = Random.insideUnitCircle.normalized;
             Vector3 direction = new Vector3(randomCircle.x, 0, randomCircle.y);
             float distance = Random.Range(minSpawnDistance, maxSpawnDistance);
 
-            // Расчет базовой позиции
+            // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             Vector3 targetPos = transform.position + direction * distance;
 
-            // Проверка земли
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
             if (FindGroundPosition(targetPos, out Vector3 validPosition))
             {
                 if (IsValidSpawnPosition(validPosition))
@@ -75,7 +75,7 @@ public class OtherGrass : MonoBehaviour
 
     private bool FindGroundPosition(Vector3 targetPos, out Vector3 groundPosition)
     {
-        // Проверяем сверху вниз
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
         if (Physics.Raycast(
             targetPos + Vector3.up * groundCheckHeight,
             Vector3.down,
@@ -93,7 +93,7 @@ public class OtherGrass : MonoBehaviour
 
     private bool IsValidSpawnPosition(Vector3 position)
     {
-        // Проверка на другие травы
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         Collider[] nearbyGrass = Physics.OverlapSphere(position, checkRadius);
         foreach (var collider in nearbyGrass)
         {
@@ -101,7 +101,7 @@ public class OtherGrass : MonoBehaviour
                 return false;
         }
 
-        // Проверка на препятствия
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (checkForObstacles && Physics.CheckSphere(position, 0.3f, obstacleLayer))
             return false;
 
@@ -125,7 +125,7 @@ public class OtherGrass : MonoBehaviour
         Vector3 startScale = Vector3.one * 0.1f;
         Vector3 endScale = Vector3.one * Random.Range(0.9f, 1.1f);
 
-        while (elapsed < duration)
+        while (elapsed < duration && grassTransform != null)
         {
             grassTransform.localScale = Vector3.Lerp(startScale, endScale, elapsed / duration);
             elapsed += Time.deltaTime;
@@ -140,15 +140,15 @@ public class OtherGrass : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        // Зона спавна
+        // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         Gizmos.color = new Color(0, 1, 0, 0.3f);
         Gizmos.DrawWireSphere(transform.position, maxSpawnDistance);
 
-        // Зона проверки
+        // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         Gizmos.color = new Color(1, 0, 0, 0.2f);
         Gizmos.DrawWireSphere(transform.position, checkRadius);
 
-        // Линия проверки земли
+        // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         Gizmos.color = Color.blue;
         Vector2 randomCircle = Random.insideUnitCircle.normalized;
         Vector3 testDirection = new Vector3(randomCircle.x, 0, randomCircle.y);

@@ -92,7 +92,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3130121454885172599}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 310.26, y: 50.143, z: 475.9}
+  m_LocalPosition: {x: 310.26, y: 50.102, z: 475.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -120,8 +120,12 @@ MonoBehaviour:
   maxIdleTime: 5
   minMoveTime: 3
   maxMoveTime: 7
-  saturation: 10
-  lifeTime: 15
+  grassToNew: 5
+  golod: 5
+  detectionRadius: 22
+  lifeTime: 33
+  targetGrass: {fileID: 0}
+  currentState: 0
   rabbit: {fileID: 3130121454885172599}
 --- !u!95 &3037167469165377031
 Animator:
@@ -155,13 +159,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 0.75
+  m_Height: 0.72
   m_Radius: 0.34
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.36, z: 0}
+  m_Center: {x: 0, y: 0.45, z: 0}
 --- !u!1 &3130121542631084961
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,7 +840,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3130783918242587257}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -39.9, y: 0, z: 39.25}
+  m_LocalPosition: {x: -39.9, y: -0.18, z: 39.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -917,8 +921,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 3133023358600794227}
   m_AABB:
-    m_Center: {x: 0.0022598016, y: 0.0002025587, z: 0.0031607198}
-    m_Extent: {x: 0.008779211, y: 0.007644344, z: 0.010325898}
+    m_Center: {x: 0.0011178232, y: 0.00020255893, z: 0.0031607198}
+    m_Extent: {x: 0.00763723, y: 0.007644344, z: 0.010325898}
   m_DirtyAABB: 0
 --- !u!1 &3130867659221210253
 GameObject:
