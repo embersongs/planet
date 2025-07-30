@@ -1,6 +1,7 @@
 ﻿using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UIElements;
+using TMPro;
 
 public class NPCController : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class NPCController : MonoBehaviour
     public float golod = 5;               // Сколько времени до режима голод
     public float detectionRadius = 10f;    // Радиус поиска травы
     public float lifeTime = 15;
+    [SerializeField] public static int rabbitCounter = 0;
+    [SerializeField] public TMP_Text rabbitText;
 
     public GameObject targetGrass;        // Целевая трава
     private float maxGolod;
@@ -39,10 +42,16 @@ public class NPCController : MonoBehaviour
     private void Death()
     {
         animator.SetBool("death", true);
+        rabbitCounter--;
+        rabbitText.text = "Rabbit: " + rabbitCounter.ToString();
     }
 
     void Start()
     {
+        GameObject rabbitCounterObject = GameObject.Find("rabbitCount");
+        rabbitText=rabbitCounterObject.GetComponent<TMP_Text>();
+        rabbitCounter++;
+        rabbitText.text = "Rabbit: " + rabbitCounter.ToString();
         //Сохраняем начальные значения уровня голода и уровня количества травы для размножения
         maxGolod = golod;
         maxGrassToNew = grassToNew;
@@ -165,7 +174,8 @@ public class NPCController : MonoBehaviour
             {
                 grassToNew = maxGrassToNew;
                 GameObject newRabbit = Instantiate(rabbit, transform.position, Quaternion.identity) as GameObject;
-     
+                rabbitCounter++;
+                rabbitText.text = "Rabbit: " + rabbitCounter.ToString();
             }
         }
 
