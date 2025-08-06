@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using TMPro;
 
 public class ClickToPlaceWithPreview : MonoBehaviour
 {
@@ -7,12 +8,17 @@ public class ClickToPlaceWithPreview : MonoBehaviour
     public GameObject objectToPlace; // Объект для спавна по клику
     public LayerMask placementMask; // Слои, по которым можно размещать объекты
     public float yOffset = 0.5f; // Смещение по высоте
+    public TMP_Text inventoryText;
 
     private Camera mainCamera;
     private bool canPlace = false;
 
+    [Header("Настройки уровня")]
+    public int Rabbits = 5; //Кроликов в инвентаре
+
     void Start()
     {
+        inventoryText.text = "Inventory Rabbit " + Rabbits;
         mainCamera = Camera.main;
 
         // Создаем превью-объект и делаем его полупрозрачным
@@ -25,13 +31,19 @@ public class ClickToPlaceWithPreview : MonoBehaviour
 
     void Update()
     {
-        UpdatePreviewPosition();
-
-        // Размещаем объект по ЛКМ
-        if (Input.GetMouseButtonDown(0) && canPlace)
+        if (!GameController.isPaused)
         {
-            Instantiate(objectToPlace, previewObject.transform.position, transform.rotation);
+            UpdatePreviewPosition();
+
+            // Размещаем объект по ЛКМ
+            if (Input.GetMouseButtonDown(0) && canPlace && Rabbits > 0)
+            {
+                Instantiate(objectToPlace, previewObject.transform.position, transform.rotation);
+                Rabbits--;
+                inventoryText.text = "Inventory Rabbit " + Rabbits;
+            }   
         }
+        
     }
 
     void UpdatePreviewPosition()
