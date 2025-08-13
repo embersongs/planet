@@ -112,7 +112,7 @@ public class OtherGrass : MonoBehaviour
     {
         grassCounter++;
         grassText.text = "Grass: " + grassCounter.ToString();
-        GameObject newGrass = Instantiate(gameObject, position, Quaternion.identity);
+        GameObject newGrass = Instantiate(gameObject, position + new Vector3(0,-0.5f,0), Quaternion.identity);
         //Destroy(newGrass.GetComponent<OtherGrass>(), 3);
         newGrass.name = grassTag;
         StartCoroutine(AnimateGrowth(newGrass.transform));
